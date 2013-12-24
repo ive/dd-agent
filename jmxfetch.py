@@ -181,8 +181,8 @@ class JMXFetch(object):
             path_to_status_file = os.path.join(tempfile.gettempdir(), "jmx_status.yaml")
             
             subprocess_args = [
-                path_to_java, # Path to the java bin
-                '-jar', 
+                path_to_java.split(' ',1)[0], # Path to the java bin
+                path_to_java.split(' ',1)[1] + ' -jar', 
                 r"%s" % path_to_jmxfetch, # Path to the jmxfetch jar
                 r"%s" % confd_path, # Path of the conf.d directory that will be read by jmxfetch
                 str(statsd_port), # Port on which the dogstatsd server is running, as jmxfetch send metrics using dogstatsd
